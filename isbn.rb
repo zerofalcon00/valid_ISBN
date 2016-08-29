@@ -19,7 +19,7 @@ def string_remove_space_or_dash(string)
 	string	
 end
 
-def multiply_the_element_by_position_and_sum(array_of_strings)
+def multiply_the_element_by_position_and_return_array_of_numbers(array_of_strings)
 	returned_array = []
 	
 	array_of_strings.each_with_index do |value, index|
@@ -31,10 +31,14 @@ def multiply_the_element_by_position_and_sum(array_of_strings)
 	returned_array
 end
 
-def add(array)
-	my_array = []
-	my_array.push(array.inject(:+))
+def adding_array(array)
+	array.inject(:+)
 end
+
+def modulos_of_sum(sum)
+	sum % 11
+end
+
 
 
 
