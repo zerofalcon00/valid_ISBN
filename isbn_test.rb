@@ -1,19 +1,18 @@
-require_relative "isbn.rb"
+require_relative "isbn_functions.rb"
 require "minitest/autorun"
 
 class TestValidIsbn < Minitest::Test
 
 	def test_empty_string_returns_false()
-		assert_equal(false, valid_isbn_length?(""))
+		assert_equal(false, valid_isbn_length_10?(""))
 	end
 
 	def test_valid_10_digit_isbn_string_returns_true()
-		assert_equal(true, valid_isbn_length?("0471958697"))
+		assert_equal(true, valid_isbn_length_10?("0471958697"))
 	end
 
 	def test_an_invalid_10_digit_isbn
-		skip("no") 
-		assert_equal(false, valid_isbn_length("0471958699"))
+		assert_equal(false, test_if_10_digit_isbn_is_real("0471958999"))
 	end
 end
 
