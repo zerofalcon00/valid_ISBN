@@ -1,3 +1,5 @@
+require "csv"
+
 def valid_isbn_length?(num)
 	if num.length == 10
 		true
@@ -136,4 +138,24 @@ def valid_isbn_10_or_13(isbn_string_of_nums)
 		false
 	end
 end
-		
+	
+def isbn_file_check
+	file = "input_isbn_file.csv"
+	output_with_results = "output_with_results_isbn_file.csv"
+	file_new = File.open(output_with_results, "w")
+
+	CSV.foreach(file) do |row|
+
+		if row[1] == " ISBN"
+			result = "CHECK"
+		elsif valid_isbn_10_or_13(row[1]) == true
+			result = "valid"
+		else
+			result = "invalid"
+		end
+
+	file_new << row[0] + ", " + row[1] + ", " + result + "\n"
+	end
+	file_new.close
+end
+isbn_file_check	
