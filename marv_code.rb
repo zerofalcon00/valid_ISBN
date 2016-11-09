@@ -57,10 +57,30 @@ def convert_x(isbn_number_array)
   isbn_number_array
 end
 
-def valid_10_digit_isbn?(array_of_nums)
+def turn_array_of_strings_to_array_of_nums(array_of_strings)
 	array = []
 
-	array_of_nums.each do |value|
+	array_of_strings.each do |value|
+		array.push(value.to_i)
+	end	
+	array
+end
+
+def adding_nums_in_array(array_of_numbers)
+
+	array_of_numbers.each_with_index do |value, index|
+		sum = 0
+		if index < 9
+			sum += (value * (index + 1))
+		end
+	end
+end
+
+def valid_10_digit_isbn?(string)
+	
+	array = []
+
+	string.each do |value|
 		array.push(value.to_i)
 	end
 	sum = 0
@@ -70,14 +90,12 @@ def valid_10_digit_isbn?(array_of_nums)
 			sum += (value * (index + 1))
 		end
 	end
+	
+	check_digit = sum % 11
 
-	check_digit = sum%11
+	check_digit == array[9]
 
-	if check_digit == array[9]
-		true
-	else
-		false
-	end
+
 end
 
 def only_numbers_in_my_array?(isbn_array)
@@ -154,8 +172,7 @@ def isbn_file_check
 			result = "invalid"
 		end
 
-	file_new << row[0] + ", " + row[1] + ", " + result + "\n"
+		file_new << row[0] + ", " + row[1] + ", " + result + "\n"
 	end
 	file_new.close
 end
-isbn_file_check	

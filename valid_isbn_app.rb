@@ -2,7 +2,7 @@ require "sinatra"
 require_relative "marv_code.rb"
 
 get "/" do
-	erb :ask_isbn
+	erb :ask_isbn, :locals => {:message => ""}
 end
 	
 post "/ask_isbn" do
@@ -13,6 +13,9 @@ post "/ask_isbn" do
 	else returned_result == false
 		returned_result = "not valid"
 	end
-	"You ISBN number is #{returned_result}"
+
+	message = "Your #{isbn} is #{returned_result}."
+	
+	erb :ask_isbn, :locals => {:message => message }
 
 end

@@ -10,11 +10,6 @@ class TestValidIsbn < Minitest::Test
 	def test_valid_10_digit_isbn_string_returns_true()
 		assert_equal(true, valid_isbn_length?("0471958697"))
 	end
-
-	def test_an_invalid_10_digit_isbn
-		skip("skip")
-		assert_equal(false, test_if_10_digit_isbn_is_real("0471958999"))
-	end
 end
 
 class TestConvertStringToArray < Minitest::Test
@@ -68,26 +63,34 @@ class TestWithMarv < Minitest::Test
 		 assert_equal(["0","8","0","4","4","2","9","5","7","10"], convert_x(["0","8","0","4","4","2","9","5","7","x"]))
 	end
 
-	def test_for_10_digit_math
-        assert_equal(true, valid_10_digit_isbn?(["0","4","7","1","9","5","8","6","9","7"]))
-        assert_equal(false, valid_10_digit_isbn?(["1","4","7","1","9","5","8","6","9","7"]))
-        assert_equal(true, valid_10_digit_isbn?(["8","7","7","1","9","5","8","6","9","10"]))
+	def test_turn_array_of_strings_to_array_of_nums
+        assert_equal([0,4,7,1,9,5,8,6,9,7], valid_10_digit_isbn?(["0","4","7","1","9","5","8","6","9","7"]))
+        assert_equal([1,4,7,1,9,5,8,6,9,7], valid_10_digit_isbn?(["1","4","7","1","9","5","8","6","9","7"]))
+        assert_equal([8,7,7,1,9,5,8,6,9,10], valid_10_digit_isbn?(["8","7","7","1","9","5","8","6","9","10"]))
+    end
+
+    def test_adding_nums_in_array
+    	assert_equal([52], adding_nums_in_array([0,4,7,1,9,5,8,9,7]))
     end
 
     def test_for_non_numeric_characters_in_my_array?
     # true if anything other than digit/can i include this in disallowed function??
-    assert_equal(nil, only_numbers_in_my_array?(["1","2","3","4","5","6","7","8","9","0"]))
-    assert_equal(true, only_numbers_in_my_array?(["1","2","3","?","5","6","7","8","9","0"]))
-    assert_equal(true, only_numbers_in_my_array?(["n","2","3","x","5","p","7","8","9","0"]))
+    	assert_equal(nil, only_numbers_in_my_array?(["1","2","3","4","5","6","7","8","9","0"]))
+    	assert_equal(true, only_numbers_in_my_array?(["1","2","3","?","5","6","7","8","9","0"]))
+    	assert_equal(true, only_numbers_in_my_array?(["n","2","3","x","5","p","7","8","9","0"]))
     end
 
     def test_for_thirteen_character_math
-    assert_equal(true, valid_13_digit_isbn?(["9","7","8","0","1","5","6","0","2","7","3","2","8"]))#true isbn
-    assert_equal(false, valid_13_digit_isbn?(["9","7","8","0","1","5","6","0","2","7","3","2","9"]))
+    	assert_equal(true, valid_13_digit_isbn?(["9","7","8","0","1","5","6","0","2","7","3","2","8"]))#true isbn
+    	assert_equal(false, valid_13_digit_isbn?(["9","7","8","0","1","5","6","0","2","7","3","2","9"]))
     end
 end
 
 class Test_final_function < Minitest::Test
+
+	def test_an_invalid_10_digit_isbn
+		assert_equal(false, valid_10_digit_isbn?("0471958999"))
+	end
 
 	def test_10_and_13_digit_strings
 		assert_equal(true, valid_isbn_10_or_13("9780156027328"))
